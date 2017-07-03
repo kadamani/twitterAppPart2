@@ -52,6 +52,16 @@ public class TwitterClient extends OAuthBaseClient {
 		client.get(apiUrl, params, handler);
 	}
 
+	public void getMentionsTimeline(int i, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+		// Can specify query string params directly or through RequestParams.
+		RequestParams params = new RequestParams();
+		params.put("count", 25);
+		params.put("since_id", 1);
+		// params.put("include_entities", true);
+		client.get(apiUrl, params, handler);
+	}
+
 	public void favTweet(long id, AsyncHttpResponseHandler handler) {
         // use the id to generate post url
         // format of post url: https://api.twitter.com/1.1/favorites/create.json?id=_____
