@@ -24,7 +24,7 @@ import cz.msebera.android.httpclient.Header;
 public class ComposeActivity extends AppCompatActivity {
     private final int REQUEST_CODE = 20;
     private TextView sms_count;
-    EditText etCompose;
+    private EditText etCompose;
     Tweet tweet;
 
     // TwitterClient client = new TwitterClient(this);

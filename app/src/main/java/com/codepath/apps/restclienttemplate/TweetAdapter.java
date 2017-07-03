@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,6 +97,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 final Tweet tweet = mTweets.get(pos);
                 if (v.getId() == replyBtn.getId()) {
                     Toast.makeText(v.getContext(), "reply button clicked", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(context, ReplyActivity.class);
+                    i.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+                    ((AppCompatActivity) context).startActivityForResult(i, 101);
                 } else if (v.getId() == rtBtn.getId()) {
                     Toast.makeText(v.getContext(), "retweet button clicked", Toast.LENGTH_LONG).show();
                 } else if (v.getId() == favBtn.getId()) {
