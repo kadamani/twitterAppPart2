@@ -29,8 +29,8 @@ import cz.msebera.android.httpclient.Header;
  */
 
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
-    static private List<Tweet> mTweets;
-    static Context context;
+     private List<Tweet> mTweets;
+     Context context;
 
     // pass in tweet array into constructor
     public TweetAdapter(List<Tweet> tweets) {
@@ -85,7 +85,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
     // create viewholder class
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
             // get position of item

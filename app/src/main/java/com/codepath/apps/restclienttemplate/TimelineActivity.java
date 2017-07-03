@@ -137,8 +137,6 @@ public class TimelineActivity extends AppCompatActivity {
 //        });
 //    }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -146,11 +144,16 @@ public class TimelineActivity extends AppCompatActivity {
         return true;
     }
 
+
     public void onComposeAction(MenuItem mi) {
         // handle click here
         Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
         startActivityForResult(i, REQUEST_CODE);
     }
+
+//    public void onProfileView(MenuItem item) {
+//        // launch the profile view
+//    }
 
 
 //    private void populateTimeline() {

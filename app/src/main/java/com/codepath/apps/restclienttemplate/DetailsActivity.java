@@ -21,7 +21,6 @@ import java.net.URL;
 import cz.msebera.android.httpclient.Header;
 
 import static com.codepath.apps.restclienttemplate.R.id.tvUserName;
-import static com.codepath.apps.restclienttemplate.TweetAdapter.context;
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -53,7 +52,7 @@ public class DetailsActivity extends AppCompatActivity {
         tvBody.setText(tweet.body);
         tvFavs.setText(tweet.favoriteCount + "");
         tvAt.setText("@" + tweet.user.screenName);
-        Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
+        Glide.with(this).load(tweet.user.profileImageUrl).into(ivProfileImage);
         // Glide.with(context).load()
 
     }
