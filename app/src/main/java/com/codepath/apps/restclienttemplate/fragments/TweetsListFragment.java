@@ -46,7 +46,7 @@ public class TweetsListFragment extends Fragment {
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
                 //showProgressBar();
-                // fetchTimelineAsync(0);
+                fetchTimelineAsync(0);
 
             }
         });
@@ -69,6 +69,10 @@ public class TweetsListFragment extends Fragment {
         // set the adapter
         rvTweets.setAdapter(tweetAdapter);
         return v;
+    }
+
+    public void fetchTimelineAsync(int page){
+
     }
 
     public void addItems(JSONArray response) {

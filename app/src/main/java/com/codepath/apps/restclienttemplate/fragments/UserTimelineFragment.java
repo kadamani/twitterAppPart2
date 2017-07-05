@@ -3,7 +3,6 @@ package com.codepath.apps.restclienttemplate.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,11 +24,17 @@ import static android.app.Activity.RESULT_OK;
  * Created by samerk on 7/3/17.
  */
 
-public class HomeTimelineFragment extends TweetsListFragment {
+public class UserTimelineFragment extends TweetsListFragment {
     private TwitterClient client;
     private final int REQUEST_CODE = 100;
-    public SwipeRefreshLayout swipeContainer;
 
+    public static UserTimelineFragment newInstance(String screenName) {
+        UserTimelineFragment userTimelineFragment = new UserTimelineFragment();
+        Bundle args = new Bundle();
+        args.putString("screen_name", screenName);
+        userTimelineFragment.setArguments(args);
+        return userTimelineFragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,10 +50,13 @@ public class HomeTimelineFragment extends TweetsListFragment {
 //        client = TwitterApp.getRestClient();
 //        populateTimeline();
 //        return super.onCreateView(inflater, container, savedInstanceState);
+//
 //    }
 
     private void populateTimeline() {
-        client.getHomeTimeline(0, new JsonHttpResponseHandler() {
+        // comes from the activity
+        String screenName = getArguments().getString("screen_name");
+        client.getUserTimeline(screenName, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d("TwitterClient", response.toString());
@@ -58,19 +66,19 @@ public class HomeTimelineFragment extends TweetsListFragment {
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //Log.d("TwitterClient", response.toString());
                 addItems(response);
-                // for each entry deserialize json object
-                for (int i = 0; i < response.length(); i++) {
-                    // convert each object to tweet model
-                    // add tweet model to data structure
-                    // notify adapter model was added
-                    try{
-                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
-                        tweets.add(tweet);
-                        tweetAdapter.notifyItemInserted(tweets.size() - 1);
-                    } catch(JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
+//                // for each entry deserialize json object
+//                for (int i = 0; i < response.length(); i++) {
+//                    // convert each object to tweet model
+//                    // add tweet model to data structure
+//                    // notify adapter model was added
+//                    try{
+//                        Tweet tweet = Tweet.fromJSON(response.getJSONObject(i));
+//                        tweets.add(tweet);
+//                        tweetAdapter.notifyItemInserted(tweets.size() - 1);
+//                    } catch(JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
             }
 
             @Override
@@ -94,7 +102,6 @@ public class HomeTimelineFragment extends TweetsListFragment {
 
     }
 
-    @Override
     public void fetchTimelineAsync(int page) {
         // Send the network request to fetch the updated data
         // `client` here is an instance of Android Async HTTP
@@ -121,9 +128,10 @@ public class HomeTimelineFragment extends TweetsListFragment {
                     } catch(JSONException e) {
                         e.printStackTrace();
                     }
+
+
                 }
                 tweetAdapter.addAll(tweets);
-                swipeContainer.setRefreshing(false);
                 // Now we call setRefreshing(false) to signal refresh has finished
                 //swipeContainer.setRefreshing(false);
                 //hideProgressBar();
@@ -151,7 +159,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
 
     // should i do public or private here?
     @Override
-     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE is defined above
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             // Extract name value from result extras

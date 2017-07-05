@@ -72,6 +72,8 @@ public class TimelineActivity extends AppCompatActivity {
         // Hide progress item
         miActionProgressItem.setVisible(false);
     }
+
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // Store instance of the menu item containing progress
@@ -151,6 +153,11 @@ public class TimelineActivity extends AppCompatActivity {
         startActivityForResult(i, REQUEST_CODE);
     }
 
+    public void onProfileView(MenuItem item) {
+        // launch profile view
+        Intent i = new Intent(this, ProfileActivity.class);
+        startActivity(i);
+    }
 //    public void onProfileView(MenuItem item) {
 //        // launch the profile view
 //    }
