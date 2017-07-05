@@ -5,19 +5,6 @@
      such as `res/menu/menu_movies.xml`  -->
 
     <item
-        android:id="@+id/tweetIcon"
-        android:icon="@drawable/tweet_icon"
-        android:title="tweet_icon"
-        app:showAsAction="always"></item>
-    <item
-        android:id="@+id/item1"
-        android:icon="@drawable/tweet_icon"
-        android:onClick="onComposeAction"
-        app:showAsAction="ifRoom"
-        android:title="Compose">
-    </item>
-
-    <item
         android:id="@+id/miProfile"
         android:icon="@drawable/ic_person_white_24dp"
         android:onClick="onProfileView"

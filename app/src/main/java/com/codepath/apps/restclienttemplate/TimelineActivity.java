@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
@@ -148,7 +149,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
     }
 
 
-    public void onComposeAction(MenuItem mi) {
+    public void onComposeAction(View v) {
         // handle click here
         Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
         startActivityForResult(i, REQUEST_CODE);
