@@ -8,24 +8,32 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.fragments.UserTimelineFragment;
+import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import cz.msebera.android.httpclient.Header;
 
 public class ProfileActivity extends AppCompatActivity {
 
     TwitterClient client;
+    Tweet tweet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        String screenName = getIntent().getStringExtra("screen_name");
-
+        String screenName;
+        tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
+        if (tweet != null) {
+             screenName = tweet.user.screenName;
+        }
+        else {
+             screenName = getIntent().getStringExtra("screen_name");
+        }
         // create the user fragment
         UserTimelineFragment userTimelineFragment = UserTimelineFragment.newInstance(screenName);
         // display the user timeline fragment inside the container (dynamically)
@@ -36,17 +44,23 @@ public class ProfileActivity extends AppCompatActivity {
         // commit
         ft.commit();
 
+
         client = TwitterApp.getRestClient();
+
         client.getUserInfo (new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 // deserialize the User object
                 try {
-                    User user = User.fromJSON(response);
-                    // set the title of the ActionBar based on the user information
-                    getSupportActionBar().setTitle(user.screenName);
-                    // populate the user headline
-                    populateUserHeadline(user);
+                    if (tweet == null) {
+                        User user = User.fromJSON(response);
+                        // set the title of the ActionBar based on the user information
+                        // populate the user headline
+                        populateUserHeadline(user);
+                    }
+                    else {
+                        populateUserHeadline(tweet.user);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -63,6 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
         ImageView ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
 
         tvName.setText(user.name);
+        getSupportActionBar().setTitle(user.screenName);
 
          tvTagline.setText(user.tagLine);
          tvFollowers.setText(user.followersCount + " Followers");

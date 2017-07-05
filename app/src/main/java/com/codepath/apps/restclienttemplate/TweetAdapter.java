@@ -31,12 +31,20 @@ import cz.msebera.android.httpclient.Header;
 public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> {
      private List<Tweet> mTweets;
      Context context;
-
+    private TweetAdapterListener mListener;
     // pass in tweet array into constructor
     public TweetAdapter(List<Tweet> tweets) {
         mTweets = tweets;
     }
 
+    public interface TweetAdapterListener {
+        public void onItemSelected(View view, int position);
+    }
+
+    public TweetAdapter(List<Tweet> tweets, TweetAdapterListener listener) {
+        mTweets = tweets;
+        mListener = listener;
+    }
     // for each row inflate layout and pass to viewholder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -160,7 +168,13 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                     }
                 } else if (v.getId() == dmBtn.getId()) {
                     Toast.makeText(v.getContext(), "dm button clicked", Toast.LENGTH_LONG).show();
-                } else {
+                } else if (v.getId() == ivProfileImage.getId()) {
+                    Intent i = new Intent(context, ProfileActivity.class);
+                    i.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+                    // show the activity
+                    context.startActivity(i);
+                }
+                else {
                     // create intent for the new activity
                     Intent intent = new Intent(context, DetailsActivity.class);
                     // serialize the movie using parceler, use its short name as a key
@@ -197,11 +211,26 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             favBtn = (ImageButton) itemView.findViewById(R.id.favBtn);
             dmBtn = (ImageButton) itemView.findViewById(R.id.dmBtn);
             itemView.setOnClickListener(this);
+
             // add click listeners for each button
             replyBtn.setOnClickListener(this);
             rtBtn.setOnClickListener(this);
             favBtn.setOnClickListener(this);
             dmBtn.setOnClickListener(this);
+            ivProfileImage.setOnClickListener(this);
+
+            // handle row click event
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null) {
+                        // get position of this row element
+                        int position = getAdapterPosition();
+                        // fire the listener callback
+                        mListener.onItemSelected(v, position);
+                    }
+                }
+            });
 
         }
 

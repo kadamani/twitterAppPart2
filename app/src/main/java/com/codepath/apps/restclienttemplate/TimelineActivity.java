@@ -3,16 +3,17 @@ package com.codepath.apps.restclienttemplate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsPagerAdapter;
+import com.codepath.apps.restclienttemplate.models.Tweet;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements TweetsListFragment.TweetSelectedListener {
 //    private TwitterClient client;
 //    private SwipeRefreshLayout swipeContainer;
 
@@ -22,7 +23,7 @@ public class TimelineActivity extends AppCompatActivity {
 
     private final int REQUEST_CODE = 100;
     // private final int REQUEST_CODE = 100;
-    MenuItem miActionProgressItem;
+    // MenuItem miActionProgressItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,27 +63,27 @@ public class TimelineActivity extends AppCompatActivity {
 //        populateTimeline();
 
     }
+//
+//    public void showProgressBar() {
+//        // Show progress item
+//        miActionProgressItem.setVisible(true);
+//    }
+//
+//    public void hideProgressBar() {
+//        // Hide progress item
+//        miActionProgressItem.setVisible(false);
+//    }
+//
 
-    public void showProgressBar() {
-        // Show progress item
-        miActionProgressItem.setVisible(true);
-    }
-
-    public void hideProgressBar() {
-        // Hide progress item
-        miActionProgressItem.setVisible(false);
-    }
-
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // Store instance of the menu item containing progress
-        miActionProgressItem = menu.findItem(R.id.miActionProgress);
-        // Extract the action-view from the menu item
-        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
-        // Return to finish
-        return super.onPrepareOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        // Store instance of the menu item containing progress
+////        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+////        // Extract the action-view from the menu item
+////        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+//        // Return to finish
+//        return super.onPrepareOptionsMenu(menu);
+//    }
 
 
 //    public void fetchTimelineAsync(int page) {
@@ -158,12 +159,13 @@ public class TimelineActivity extends AppCompatActivity {
         Intent i = new Intent(this, ProfileActivity.class);
         startActivity(i);
     }
-//    public void onProfileView(MenuItem item) {
-//        // launch the profile view
-//    }
 
+    @Override
+    public void onTweetSelected(Tweet tweet) {
+        Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
+    }
 
-//    private void populateTimeline() {
+    //    private void populateTimeline() {
 //        client.getHomeTimeline(0, new JsonHttpResponseHandler() {
 //            @Override
 //            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -210,21 +212,4 @@ public class TimelineActivity extends AppCompatActivity {
 //
 //    }
 
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        // REQUEST_CODE is defined above
-//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-//            // Extract name value from result extras
-//            Tweet tweet = Parcels.unwrap(data.getParcelableExtra(Tweet.class.getSimpleName()));
-//            int code = data.getExtras().getInt("code", 0);
-//            tweets.add(0, tweet);
-//            tweetAdapter.notifyItemInserted(0);
-//            rvTweets.scrollToPosition(0);
-//            // Toast the name to display temporarily on screen
-//            // Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
-//
-//
-//        }
-//    }
 }

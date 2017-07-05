@@ -23,9 +23,13 @@ import java.util.ArrayList;
  * Created by samerk on 7/3/17.
  */
 
-public class TweetsListFragment extends Fragment {
+public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAdapterListener {
     // inflation happens inside oncreateview
 
+    public interface TweetSelectedListener {
+        // handle tweet selection
+        public void onTweetSelected(Tweet tweet);
+    }
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
@@ -61,7 +65,7 @@ public class TweetsListFragment extends Fragment {
         // init arraylist
         tweets = new ArrayList<>();
         // construct adapter
-        tweetAdapter = new TweetAdapter(tweets);
+        tweetAdapter = new TweetAdapter(tweets, this);
 
         // setup recyclerview (layout manager, use adapter)
         rvTweets.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -93,5 +97,10 @@ public class TweetsListFragment extends Fragment {
         }
     }
 
-
+    @Override
+    public void onItemSelected(View view, int position) {
+        Tweet tweet = tweets.get(position);
+        //Toast.makeText(getContext(), tweet.body, Toast.LENGTH_SHORT).show();
+        ((TweetSelectedListener) getActivity()).onTweetSelected(tweet);
+    }
 }
