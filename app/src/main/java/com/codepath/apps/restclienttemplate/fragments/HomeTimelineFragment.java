@@ -92,6 +92,14 @@ public class HomeTimelineFragment extends TweetsListFragment {
 
     }
 
+    public void appendTweet(Tweet tweet) {
+        tweets.add(0, tweet);
+        // inserted at position 0
+        tweetAdapter.notifyItemInserted(0);
+        // do work
+        rvTweets.scrollToPosition(0);
+    }
+
     @Override
     public void fetchTimelineAsync(int page) {
         // Send the network request to fetch the updated data

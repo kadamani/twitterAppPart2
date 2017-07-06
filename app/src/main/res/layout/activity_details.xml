@@ -31,10 +31,10 @@
         android:id="@+id/tvAt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:layout_alignEnd="@+id/tvUserName"
+        android:layout_alignStart="@+id/tvUserName"
         android:layout_below="@+id/tvUserName"
-        android:layout_alignStart="@+id/tvUserName" />
+        android:text="TextView" />
 
     <TextView
         android:id="@+id/tvBody"
