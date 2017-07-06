@@ -3,7 +3,6 @@ package com.codepath.apps.restclienttemplate.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,7 +27,6 @@ import static android.app.Activity.RESULT_OK;
 public class HomeTimelineFragment extends TweetsListFragment {
     private TwitterClient client;
     private final int REQUEST_CODE = 100;
-    public SwipeRefreshLayout swipeContainer;
 
 
     @Override

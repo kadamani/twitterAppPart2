@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAdapterListener {
     // inflation happens inside oncreateview
 
+
     public interface TweetSelectedListener {
         // handle tweet selection
         void onTweetSelected(Tweet tweet);
@@ -33,7 +34,7 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
-    private SwipeRefreshLayout swipeContainer;
+    public SwipeRefreshLayout swipeContainer;
 
     @Nullable
     @Override
@@ -96,6 +97,7 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
 
         }
     }
+
 
     @Override
     public void onItemSelected(View view, int position) {

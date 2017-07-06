@@ -75,7 +75,7 @@ public class MentionsTimelineFragment extends TweetsListFragment {
         });
 
     }
-
+@Override
     public void fetchTimelineAsync(int page) {
         // Send the network request to fetch the updated data
         // `client` here is an instance of Android Async HTTP
@@ -105,6 +105,7 @@ public class MentionsTimelineFragment extends TweetsListFragment {
 
                 }
                 tweetAdapter.addAll(tweets);
+                swipeContainer.setRefreshing(false);
                 // Now we call setRefreshing(false) to signal refresh has finished
                 //swipeContainer.setRefreshing(false);
                 //hideProgressBar();
