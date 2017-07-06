@@ -38,58 +38,48 @@
 
     <TextView
         android:id="@+id/tvBody"
-        android:layout_width="346dp"
-        android:layout_height="115dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/ivProfileImage"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp"
-        android:layout_weight="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="TextView"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="80dp" />
 
-    <LinearLayout
-        android:id="@+id/linty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tvBody"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_alignParentBottom="true">
 
-        <ImageButton
-            android:id="@+id/replyBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="19dp"
-            android:baselineAlignBottom="@id/tvBody"
-            android:layout_alignStart="@+id/ivProfileImage"
-            android:layout_marginLeft="50dp"
-            android:layout_toEndOf="@+id/ivProfileImage"
-            android:background="@android:color/transparent"
-            android:onClick="onReplyAction"
-            app:srcCompat="@drawable/replyicon" />
+    <ImageButton
+        android:id="@+id/replyBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tvBody"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:onClick="onReplyAction"
+        app:srcCompat="@drawable/replyicon" />
 
 
         <ImageButton
             android:id="@+id/rtBtn"
             android:layout_width="21dp"
             android:layout_height="19dp"
-            android:layout_alignTop="@+id/replyBtn"
-            android:layout_marginLeft="120dp"
-            android:layout_marginStart="21dp"
-            android:layout_toEndOf="@+id/replyBtn"
             android:background="@android:color/transparent"
+            android:layout_alignTop="@id/replyBtn"
+            android:layout_toRightOf="@id/replyBtn"
+            android:layout_marginStart="50dp"
             app:srcCompat="@drawable/ic_vector_retweet_stroke" />
 
         <ImageButton
             android:id="@+id/favoBtn"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
-            android:layout_below="@+id/tvBody"
-            android:layout_alignTop="@+id/replyBtn"
-            android:layout_marginEnd="22dp"
-            android:layout_marginLeft="120dp"
-            android:layout_toEndOf="@+id/rtBtn"
+            android:layout_alignTop="@id/replyBtn"
+            android:layout_toRightOf="@id/rtBtn"
+            android:layout_marginStart="50dp"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_vector_heart_stroke" />
 
@@ -97,25 +87,19 @@
             android:id="@+id/tvFavs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/favoBtn"
-            android:layout_weight="1"
+            android:layout_alignTop="@id/replyBtn"
+            android:layout_toRightOf="@id/favoBtn"
+            android:layout_marginStart="5dp"
             android:text="TextView" />
 
         <ImageButton
             android:id="@+id/dmBtn"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
-            android:layout_alignTop="@+id/favBtn"
-            android:layout_marginLeft="120dp"
-            android:layout_toEndOf="@+id/favBtn"
-            android:layout_marginRight="225dp"
+            android:layout_alignTop="@id/replyBtn"
+            android:layout_toRightOf="@id/favoBtn"
+            android:layout_marginStart="50dp"
             android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_vector_messages_stroke"
-            android:layout_weight="1" />
-
-
-    </LinearLayout>
-
-
+            app:srcCompat="@drawable/ic_vector_messages_stroke" />
 
 </RelativeLayout>
