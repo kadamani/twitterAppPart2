@@ -26,10 +26,18 @@ public class ComposeActivity extends AppCompatActivity {
     private TextView sms_count;
     private EditText etCompose;
     Tweet tweet;
+    String screenName;
+    long uid;
 
     // TwitterClient client = new TwitterClient(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
+        if (tweet != null) {
+            screenName = tweet.user.screenName;
+            uid = tweet.uid;
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
         sms_count = (TextView) findViewById(R.id.tvChar);
@@ -55,25 +63,41 @@ public class ComposeActivity extends AppCompatActivity {
     }
 
     public void onSubmit(View v) {
-        TwitterApp.getRestClient().sendTweet(etCompose.getText().toString(), new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    tweet = new Tweet();
-                    tweet = Tweet.fromJSON(response);
-                    Intent i = new Intent(ComposeActivity.this, TimelineActivity.class);
-                    i.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+        if (tweet == null) {
+            TwitterApp.getRestClient().sendTweet(etCompose.getText().toString(), new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
+                        tweet = new Tweet();
+                        tweet = Tweet.fromJSON(response);
+                        Intent i = new Intent(ComposeActivity.this, TimelineActivity.class);
+                        i.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
 
-                    setResult(RESULT_OK, i); // set result code and bundle data for response
-                    finish(); // closes the activity, pass data to parent
+                        setResult(RESULT_OK, i); // set result code and bundle data for response
+                        finish(); // closes the activity, pass data to parent
 
 
-                } catch (JSONException e) {
-                    Log.e("Compose Activity", "Error forming new tweet", e);
+                    } catch (JSONException e) {
+                        Log.e("Compose Activity", "Error forming new tweet", e);
+                    }
+                    // super.onSuccess(statusCode, headers, response);
                 }
-                // super.onSuccess(statusCode, headers, response);
-            }
-        });
+            });
+        }
+        else {
+            TwitterApp.getRestClient().replyTweet(etCompose.getText().toString(), screenName, uid, new JsonHttpResponseHandler(){
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        Intent i = new Intent(ComposeActivity.this, TimelineActivity.class);
+                        i.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+
+                        setResult(RESULT_OK, i); // set result code and bundle data for response
+                        finish(); // closes the activity, pass data to parent
+
+
+                }
+            });
+        }
 
 
     }

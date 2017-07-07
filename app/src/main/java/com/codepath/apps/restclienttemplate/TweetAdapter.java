@@ -104,7 +104,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 final Tweet tweet = mTweets.get(pos);
                 if (v.getId() == replyBtn.getId()) {
                     Toast.makeText(v.getContext(), "reply button clicked", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(context, ReplyActivity.class);
+                    Intent i = new Intent(context, ComposeActivity.class);
                     i.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
                     ((AppCompatActivity) context).startActivityForResult(i, 101);
                 } else if (v.getId() == rtBtn.getId()) {

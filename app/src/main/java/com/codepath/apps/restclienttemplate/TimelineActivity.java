@@ -19,12 +19,6 @@ import org.parceler.Parcels;
 
 public class TimelineActivity extends AppCompatActivity implements TweetsListFragment.TweetSelectedListener {
 
-//    private TwitterClient client;
-//    private SwipeRefreshLayout swipeContainer;
-
-//    TweetAdapter tweetAdapter;
-//    ArrayList<Tweet> tweets;
-//    RecyclerView rvTweets;
 
     private final int REQUEST_CODE = 100;
     TweetsPagerAdapter adapterViewPager;
@@ -47,6 +41,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
 
+
 //        // Configure the refreshing colors
 //        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
 //                android.R.color.holo_green_light,
@@ -59,16 +54,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 //        populateTimeline();
 
     }
-//
-//    public void showProgressBar() {
-//        // Show progress item
-//        miActionProgressItem.setVisible(true);
-//    }
-//
-//    public void hideProgressBar() {
-//        // Hide progress item
-//        miActionProgressItem.setVisible(false);
-//    }
+
 //
 
 //    @Override
@@ -94,6 +80,14 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         // handle click here
         Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
         startActivityForResult(i, REQUEST_CODE);
+    }
+
+    public void onReplyAction(View v, Tweet tweet) {
+        // handle click here
+        Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
+        i.putExtra(Tweet.class.getSimpleName(), Parcels.wrap(tweet));
+        startActivityForResult(i, REQUEST_CODE);
+
     }
 
     public void onProfileView(MenuItem item) {

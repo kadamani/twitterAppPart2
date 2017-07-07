@@ -80,7 +80,6 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
-        android:onClick="onReplyAction"
         app:srcCompat="@drawable/replyicon" />
 
 
