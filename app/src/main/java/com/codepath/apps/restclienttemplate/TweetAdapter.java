@@ -101,7 +101,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             TwitterClient client = new TwitterClient(context);
             // make sure position is valid
             if (pos != RecyclerView.NO_POSITION) {
-                // get the movie at the position, this won't work if the class is static
                 final Tweet tweet = mTweets.get(pos);
                 if (v.getId() == replyBtn.getId()) {
                     Toast.makeText(v.getContext(), "reply button clicked", Toast.LENGTH_LONG).show();

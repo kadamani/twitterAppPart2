@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.codepath.apps.restclienttemplate.EndlessRecyclerViewScrollListener;
 import com.codepath.apps.restclienttemplate.R;
 import com.codepath.apps.restclienttemplate.TweetAdapter;
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -35,6 +36,7 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
     public SwipeRefreshLayout swipeContainer;
+    EndlessRecyclerViewScrollListener scrollListener;
 
     @Nullable
     @Override
@@ -68,11 +70,23 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
         // construct adapter
         tweetAdapter = new TweetAdapter(tweets, this);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         // setup recyclerview (layout manager, use adapter)
-        rvTweets.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvTweets.setLayoutManager(linearLayoutManager);
 
         // set the adapter
         rvTweets.setAdapter(tweetAdapter);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                Tweet maxTweet = tweets.get(tweets.size() - 1);
+                loadNextData(maxTweet.uid - 1);
+            }
+        };
+
+        rvTweets.addOnScrollListener(scrollListener);
         return v;
     }
 
@@ -98,6 +112,9 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
         }
     }
 
+    public void loadNextData(long offset) {
+
+    }
 
     @Override
     public void onItemSelected(View view, int position) {
