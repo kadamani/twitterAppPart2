@@ -47,7 +47,7 @@ public class DetailsActivity extends AppCompatActivity {
         //preImage = (ImageView) findViewById(R.id.preImage);
 
         // unwrap the movie passed in via intent, using its simple name as a key
-        tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
+        tweet = Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
         tvUsername.setText(tweet.user.name);
         tvBody.setText(tweet.body);
         tvFavs.setText(tweet.favoriteCount + "");

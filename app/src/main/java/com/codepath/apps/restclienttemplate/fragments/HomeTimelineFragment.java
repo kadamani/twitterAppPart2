@@ -36,15 +36,6 @@ public class HomeTimelineFragment extends TweetsListFragment {
         populateTimeline();
     }
 
-//    @Nullable
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//
-//        client = TwitterApp.getRestClient();
-//        populateTimeline();
-//        return super.onCreateView(inflater, container, savedInstanceState);
-//    }
-
     private void populateTimeline() {
         client.getHomeTimeline(0, new JsonHttpResponseHandler() {
             @Override
@@ -166,10 +157,6 @@ public class HomeTimelineFragment extends TweetsListFragment {
             tweets.add(0, tweet);
             tweetAdapter.notifyItemInserted(0);
             rvTweets.scrollToPosition(0);
-            // Toast the name to display temporarily on screen
-            // Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
-
-
         }
     }
 
