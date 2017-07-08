@@ -218,19 +218,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             dmBtn.setOnClickListener(this);
             ivProfileImage.setOnClickListener(this);
 
-            // handle row click event
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (mListener != null) {
-//                        // get position of this row element
-//                        int position = getAdapterPosition();
-//                        // fire the listener callback
-//                        mListener.onItemSelected(v, position);
-//                    }
-//                }
-//            });
-
         }
 
 
