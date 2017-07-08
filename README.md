@@ -57,6 +57,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+
 Switching from Activities to fragments was fairly challenging since I was often unsure of exactly where to insert my code. Editing the XML manually to fix the UI was also a challenge but I feel a lot better now about designing basic layouts.
 
 ## Open-source libraries used
