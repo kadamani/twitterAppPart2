@@ -53,6 +53,8 @@ Here's a walkthrough of implemented user stories:
 <img src='https://github.com/kadamani/twitterAppPart2/blob/master/twitterWalkthrough1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
+This is a gif of replying functionality:
+
 <img src='https://github.com/kadamani/twitterAppPart2/blob/master/twitterReply.gif' title='Reply Functionality Gif' width='' alt='ReplyGif' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
